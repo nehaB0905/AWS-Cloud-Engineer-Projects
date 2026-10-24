@@ -27,6 +27,37 @@ This project demonstrates my understanding of AWS networking fundamentals and ba
 
 A VPC contains public and private subnets. Public resources can access the internet through an Internet Gateway when routing and security rules permit. Private resources can access the internet outbound through a NAT Gateway placed in a public subnet.
 
+
+## Architecture Diagram
+
+```mermaid
+flowchart TB
+    Internet((Internet))
+    IGW[Internet Gateway]
+
+    subgraph VPC["VPC: 10.0.0.0/16"]
+        subgraph Public["Public Subnet: 10.0.1.0/24"]
+            PublicRT["Public Route Table<br/>0.0.0.0/0 → IGW"]
+            NAT["NAT Gateway<br/>Elastic IP"]
+            PublicEC2["Public EC2 Instance"]
+        end
+
+        subgraph Private["Private Subnet: 10.0.2.0/24"]
+            PrivateRT["Private Route Table<br/>0.0.0.0/0 → NAT"]
+            PrivateEC2["Private EC2 Instance"]
+        end
+    end
+
+    Internet <--> IGW
+    IGW --- PublicRT
+    PublicRT --- NAT
+    PublicRT --- PublicEC2
+    PrivateRT --- PrivateEC2
+    PrivateEC2 -->|Outbound traffic| NAT
+    NAT --> IGW
+```
+
+**Note:** This is a planned architecture. The diagram documents the intended traffic paths; it does not mean AWS resources have already been created or tested.
 **Practical Tasks**
 
 1. Create a VPC.
