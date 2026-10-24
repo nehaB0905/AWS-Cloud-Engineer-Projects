@@ -68,10 +68,33 @@ flowchart TB
 6. Configure Security Groups.
 7. Test and troubleshoot network connectivity.
 
-**Learning Outcome**
+## Local Validation and Testing
 
-Develop practical knowledge of AWS networking, secure network design, and troubleshooting.
+### Scripts
 
-**Project Status**
+| Script | Purpose |
+|---|---|
+| `validate_network.py` | Validates subnet CIDR ranges and checks for overlapping networks |
+| `validate_routes.py` | Simulates public and private subnet route validation |
+| `validate_security.py` | Simulates Security Group and Network ACL checks |
 
-Documentation created. Hands-on implementation: Not started. 
+### Validation Results
+
+- Verified that public and private subnet CIDRs are within the VPC range.
+- Confirmed that the configured subnet ranges do not overlap.
+- Validated the simulated public route through an Internet Gateway.
+- Validated the simulated private route through a NAT Gateway.
+- Tested simulated network security rules.
+
+### Tools Used
+
+- Python
+- PowerShell
+- GitHub
+
+### Project Learning
+
+This project helped me practice subnet CIDR validation, routing concepts, network security fundamentals, and basic troubleshooting using local Python scripts.
+
+**Note:** These tests simulate AWS networking logic locally. They do not create or validate actual AWS resources.
+
